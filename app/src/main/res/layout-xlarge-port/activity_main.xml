@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/fragment7"
+        android:name="astroweather.com.astro.SunFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_weight="1"
+        tools:layout="@layout/sun_fragment" />
+
+    <fragment
+        android:id="@+id/fragment8"
+        android:name="astroweather.com.astro.MoonFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_weight="1"
+        tools:layout="@layout/moon_fragment" />
+</LinearLayout>

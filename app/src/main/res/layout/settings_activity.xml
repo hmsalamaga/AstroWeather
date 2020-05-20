@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/Longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Długość: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no"
+                android:labelFor="@+id/longitude"/>
+
+            <EditText
+                android:id="@+id/longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:id="@+id/Latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Szerokość:  "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no"
+                android:labelFor="@+id/latitude"/>
+
+            <EditText
+                android:id="@+id/latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:id="@+id/Frequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Częstotliwość odświeżania"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no"
+                android:labelFor="@+id/frequency"/>
+
+            <EditText
+                android:id="@+id/frequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:importantForAutofill="no" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="OK"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+</LinearLayout>
