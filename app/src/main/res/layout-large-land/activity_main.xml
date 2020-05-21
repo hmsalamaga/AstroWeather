@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:textAlignment="center"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <fragment
-        android:id="@+id/fragment3"
+        android:id="@+id/sunFragment"
         android:name="astroweather.com.astro.SunFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        tools:layout="@layout/moon_fragment" />
+
+    <fragment
+        android:id="@+id/moonFragment"
+        android:name="astroweather.com.astro.MoonFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="1"
         tools:layout="@layout/sun_fragment" />
 
-    <fragment
-        android:id="@+id/fragment4"
-        android:name="astroweather.com.astro.MoonFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@layout/moon_fragment" />
 </LinearLayout>

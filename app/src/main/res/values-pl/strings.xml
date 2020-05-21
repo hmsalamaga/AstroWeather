@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Astro</string>
+    <string name="longitude">Długość: </string>
+    <string name="latitude">Szerokość: </string>
+    <string name="refresh">Częstotliwość odświeżania: </string>
+    <string name="settings">Ustawienia</string>
+    <string name="refreshed">Odświeżone</string>
+
+    <string name="sun">Słońce</string>
+    <string name="sunrise">Wschód słońca: </string>
+    <string name="sunset">Zachód słońca: </string>
+    <string name="sunrise_azimuth">Azymut wschodu: </string>
+    <string name="sunset_azimuth">Azymut zachodu: </string>
+    <string name="twilight">Zmierzch: </string>
+    <string name="dawn">Świt: </string>
+
+    <string name="moon">Moon</string>
+    <string name="moonrise">Wschód Księżyca: </string>
+    <string name="moonset">Zachód Księżyca: </string>
+    <string name="new_moon">Nów: </string>
+    <string name="full_moon">Pełnia: </string>
+    <string name="faze">Faza: </string>
+    <string name="lunar_day">Dzień miesiąca synodycznego: </string>
+</resources>

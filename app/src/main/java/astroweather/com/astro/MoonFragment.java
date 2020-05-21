@@ -29,7 +29,7 @@ public class MoonFragment extends Fragment {
     private TextClock time;
     private Context mContext = getActivity();
 
-    final Handler handler=new Handler();
+    final Handler handler = new Handler();
 
     private AppPreferenceManager appPreferenceManager;
     int refreshFrequency;
@@ -53,8 +53,8 @@ public class MoonFragment extends Fragment {
         return view;
     }
 
-    public void setMoonData(double longitude, double latitude) {
-        ArrayList<String> moonInfo = new Calculator(longitude, latitude).setMoonData();
+    public void setMoonData(double latitude, double longitude) {
+        ArrayList<String> moonInfo = new Calculator(latitude, longitude).setMoonData();
         this.longitude.setText(moonInfo.get(0));
         this.latitude.setText(moonInfo.get(1));
         this.moonrise.setText(moonInfo.get(2));
@@ -74,15 +74,15 @@ public class MoonFragment extends Fragment {
         savedLatitude = appPreferenceManager.loadLatitude();
         refreshFrequency = appPreferenceManager.loadRefreshFrequency();
 
-        setMoonData(savedLongitude, savedLatitude);
-        Runnable updateTask=new Runnable() {
+        setMoonData(savedLatitude, savedLongitude);
+        Runnable updateTask = new Runnable() {
             @Override
             public void run() {
-                setMoonData(savedLongitude, savedLatitude);
+                setMoonData(savedLatitude, savedLongitude);
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 time.setText(sdf.format(cal.getTime()));
-                handler.postDelayed(this, 1000 );
+                handler.postDelayed(this, 1000);
             }
         };
         handler.postDelayed(updateTask, 5000);

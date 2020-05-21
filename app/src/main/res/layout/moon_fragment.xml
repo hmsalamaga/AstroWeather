@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/backgroundDark"
-    android:weightSum="10">
+    android:orientation="vertical"
+    android:weightSum="11">
 
     <ImageView
         android:id="@+id/cbPicView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/moon"
         android:layout_weight="2"
-        android:contentDescription="Moon" />
+        android:contentDescription="@string/moon"
+        android:src="@drawable/moon" />
 
     <TextClock
         android:id="@+id/time"
@@ -27,118 +27,251 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/longitude"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fontFamily="sans-serif"
-        android:text="Długość:  "
-        android:textAlignment="center"
-        android:textColor="@color/fontDark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/latitude"
+        <TextView
+            android:id="@+id/Longitude"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/longitude"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/longitude"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fontFamily="sans-serif"
-        android:text="Szerokość:  "
-        android:textAlignment="center"
-        android:textColor="@color/fontDark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Moonrise"
+        <TextView
+            android:id="@+id/Latitude"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/latitude"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/latitude"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Wschód: "
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Moonset"
+        <TextView
+            android:id="@+id/moonrise"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/moonrise"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Moonrise"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Zachód: "
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/NewMoon"
+        <TextView
+            android:id="@+id/moonset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/moonset"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Moonset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Nów:"
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/FullMoon"
+        <TextView
+            android:id="@+id/newMoon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/new_moon"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/NewMoon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Pełnia: "
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Faze"
+        <TextView
+            android:id="@+id/fullMoon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/full_moon"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/FullMoon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Faza: "
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/LunarDay"
+        <TextView
+            android:id="@+id/faze"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/faze"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Faze"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:text="Dzień miesiąca synodycznego: "
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/LunarDayData"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif"
-        android:textAlignment="center"
-        android:textColor="@color/fontLight"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/LunarDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/lunar_day"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/LunarDayData"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/fontLight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </LinearLayout>

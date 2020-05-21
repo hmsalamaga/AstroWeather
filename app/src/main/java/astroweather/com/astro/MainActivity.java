@@ -12,19 +12,18 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager viewPager;
-    final Handler handler=new Handler();
+    ViewPager viewPager = null;
+    final Handler handler = new Handler();
 
 
     Runnable task2 = new Runnable() {
         @Override
         public void run() {
-            handler.postDelayed(this, 5000 );
+            handler.postDelayed(this, 5000);
             Log.e("H", "czas");
-            Toast.makeText(MainActivity.this, "Refreshed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getResources().getString(R.string.refreshed), Toast.LENGTH_SHORT).show();
         }
     };
-
 
 
     @Override
@@ -35,14 +34,11 @@ public class MainActivity extends AppCompatActivity {
         int screenSize = getResources().getConfiguration().screenLayout &
                 Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        if(screenSize!=Configuration.SCREENLAYOUT_SIZE_LARGE && screenSize!=Configuration.SCREENLAYOUT_SIZE_XLARGE &&
-                getResources().getConfiguration().orientation!=Configuration.ORIENTATION_LANDSCAPE){
-
+        if (screenSize != Configuration.SCREENLAYOUT_SIZE_LARGE && screenSize != Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             viewPager = findViewById(R.id.ViewPager);
             viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         }
-        handler.postDelayed(task2,5000);
-
+        handler.postDelayed(task2, 5000);
     }
 
     @Override
@@ -60,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.add("Settings").setIntent(new Intent(this, SettingsActivity.class));
+        menu.add(getResources().getString(R.string.settings)).setIntent(new Intent(this, SettingsActivity.class));
         return true;
     }
 
@@ -71,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.exit(1);
         }
     }

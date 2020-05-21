@@ -13,13 +13,13 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 return new SunFragment();
             case 1:
                 return new MoonFragment();
         }
+
         return null;
     }
 

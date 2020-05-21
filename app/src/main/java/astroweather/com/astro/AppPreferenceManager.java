@@ -24,9 +24,11 @@ public class AppPreferenceManager {
     public void saveLongitude(Double longitude) {
         sharedPreferences.edit().putLong(PREF_LONGITUDE, Double.doubleToLongBits(longitude)).apply();
     }
+
     public void saveLatitude(Double latitude) {
         sharedPreferences.edit().putLong(PREF_LATITUDE, Double.doubleToLongBits(latitude)).apply();
     }
+
     public void saveRefreshFrequency(int frequency) {
         sharedPreferences.edit().putInt(PREF_FREQUENCY, frequency).apply();
     }

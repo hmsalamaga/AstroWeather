@@ -52,11 +52,11 @@ public class SettingsActivity extends Activity {
                     longitudeValue = Double.parseDouble(longitude.getText().toString());
                     latitudeValue = Double.parseDouble(latitude.getText().toString());
                     frequencyRefresh = Integer.parseInt(frequency.getText().toString());
-                    if(longitudeValue < -180 || longitudeValue > 180){
+                    if (longitudeValue < -180 || longitudeValue > 180) {
                         Toast.makeText(getApplicationContext(), "Longitude Input Error", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if(latitudeValue < -90 || latitudeValue > 90) {
+                    if (latitudeValue < -90 || latitudeValue > 90) {
                         Toast.makeText(getApplicationContext(), "Latitude Input Error", Toast.LENGTH_SHORT).show();
                         return;
                     }

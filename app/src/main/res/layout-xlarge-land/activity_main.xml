@@ -4,23 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <fragment
-        android:id="@+id/fragment9"
+        android:id="@+id/sunFragment"
         android:name="astroweather.com.astro.SunFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="1"
         tools:layout="@layout/moon_fragment" />
 
     <fragment
-        android:id="@+id/fragment10"
+        android:id="@+id/moonFragment"
         android:name="astroweather.com.astro.MoonFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="1"
         tools:layout="@layout/sun_fragment" />
+
 </LinearLayout>

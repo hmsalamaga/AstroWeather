@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,13 @@ public class SunFragment extends Fragment {
     private TextView longitude;
     private TextView latitude;
     private TextView sunriseTime;
-    private TextView sunriseAthimuth;
+    private TextView sunriseAzimuth;
     private TextView sunsetTime;
-    private TextView sunsetAthimuth;
+    private TextView sunsetAzimuth;
     private TextView twilightTime;
     private TextView dawnTime;
     private TextClock time;
-    final Handler handler=new Handler();
-    private Runnable updateCalculationsTask = null;
+    final Handler handler = new Handler();
 
 
     private AppPreferenceManager appPreferenceManager;
@@ -43,9 +43,9 @@ public class SunFragment extends Fragment {
         longitude = view.findViewById(R.id.longitude);
         latitude = view.findViewById(R.id.latitude);
         sunriseTime = view.findViewById(R.id.SunriseTime);
-        sunriseAthimuth = view.findViewById(R.id.SunriseAthimuth);
+        sunriseAzimuth = view.findViewById(R.id.SunriseAzimuth);
         sunsetTime = view.findViewById(R.id.SunsetTime);
-        sunsetAthimuth = view.findViewById(R.id.SunsetAzimuth);
+        sunsetAzimuth = view.findViewById(R.id.SunsetAzimuth);
         twilightTime = view.findViewById(R.id.TwilightTime);
         dawnTime = view.findViewById(R.id.DawnTime);
 
@@ -57,9 +57,9 @@ public class SunFragment extends Fragment {
         this.longitude.setText(sunInfo.get(0));
         this.latitude.setText(sunInfo.get(1));
         this.sunriseTime.setText(sunInfo.get(2));
-        this.sunriseAthimuth.setText(sunInfo.get(3));
+        this.sunriseAzimuth.setText(sunInfo.get(3));
         this.sunsetTime.setText(sunInfo.get(4));
-        this.sunsetAthimuth.setText(sunInfo.get(5));
+        this.sunsetAzimuth.setText(sunInfo.get(5));
         this.twilightTime.setText(sunInfo.get(6));
         this.dawnTime.setText(sunInfo.get(7));
 
@@ -74,19 +74,19 @@ public class SunFragment extends Fragment {
         savedLatitude = appPreferenceManager.loadLatitude();
         refreshFrequency = appPreferenceManager.loadRefreshFrequency();
 
-        setSunData(savedLongitude, savedLatitude);
-        Runnable updateTimeTask = new Runnable() {
+        setSunData(savedLatitude, savedLongitude);
+        Runnable updateTask = new Runnable() {
             @Override
             public void run() {
-                setSunData(savedLongitude, savedLatitude);
+                setSunData(savedLatitude, savedLongitude);
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 time.setText(sdf.format(cal.getTime()));
-                handler.postDelayed(this, 1000 );
+                handler.postDelayed(this, 1000);
             }
         };
 
-        handler.postDelayed(updateTimeTask,  5000);
+        handler.postDelayed(updateTask, 5000);
     }
 
 }
