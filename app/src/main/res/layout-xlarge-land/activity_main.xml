@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:baselineAligned="false">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/sunFragment"
         android:name="astroweather.com.astro.SunFragment"
         android:layout_width="0dp"
@@ -16,7 +16,7 @@
         android:layout_weight="1"
         tools:layout="@layout/moon_fragment" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/moonFragment"
         android:name="astroweather.com.astro.MoonFragment"
         android:layout_width="0dp"

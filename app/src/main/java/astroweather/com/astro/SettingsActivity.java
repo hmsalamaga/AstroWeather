@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends Activity {
 
-    AppPreferenceManager appPreferenceManager;
+    private AppPreferenceManager appPreferenceManager;
 
     private EditText longitude;
     private EditText latitude;

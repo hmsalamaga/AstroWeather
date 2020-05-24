@@ -10,8 +10,8 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 
-public class Calculator {
-    private AstroCalculator astroCalculator;
+class Calculator {
+    private final AstroCalculator astroCalculator;
 
     public Calculator(Double latitude, Double longitude) {
         Calendar calendar = new GregorianCalendar();
@@ -56,7 +56,7 @@ public class Calculator {
         return data;
     }
 
-    public static int getOffset() {
+    private static int getOffset() {
         TimeZone timezone = TimeZone.getDefault();
         int seconds = timezone.getOffset(Calendar.ZONE_OFFSET) / 1000;
         double minutes = seconds / 60;

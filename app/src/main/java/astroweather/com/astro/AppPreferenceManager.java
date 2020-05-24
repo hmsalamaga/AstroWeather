@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
-public class AppPreferenceManager {
+class AppPreferenceManager {
     private static final String PREF_LONGITUDE = "savedLongitude";
     private static final String PREF_LATITUDE = "savedLatitude";
     private static final String PREF_FREQUENCY = "refresh";
@@ -14,7 +14,7 @@ public class AppPreferenceManager {
     private static final int DEFAULT_FREQUENCY = 1;
 
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public AppPreferenceManager(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

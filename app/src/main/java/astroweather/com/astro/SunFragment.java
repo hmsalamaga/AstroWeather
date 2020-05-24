@@ -2,9 +2,8 @@ package astroweather.com.astro;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,8 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,15 +27,15 @@ public class SunFragment extends Fragment {
     private TextView twilightTime;
     private TextView dawnTime;
     private TextClock time;
-    final Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
 
-    int refreshFrequency;
-    double savedLongitude;
-    double savedLatitude;
+    private int refreshFrequency;
+    private double savedLongitude;
+    private double savedLatitude;
     private Context mContext;
 
-    Runnable updateTimerTask = new Runnable() {
+    private final Runnable updateTimerTask = new Runnable() {
         @Override
         public void run() {
             setCurrentTime();
@@ -46,7 +43,7 @@ public class SunFragment extends Fragment {
         }
     };
 
-    Runnable updateSunDataTask = new Runnable() {
+    private final Runnable updateSunDataTask = new Runnable() {
         @Override
         public void run() {
             setSunData(savedLatitude, savedLongitude);
@@ -72,7 +69,7 @@ public class SunFragment extends Fragment {
         return view;
     }
 
-    public void setSunData(double longitude, double latitude) {
+    private void setSunData(double longitude, double latitude) {
         ArrayList<String> sunInfo = new Calculator(longitude, latitude).setSunData();
         this.longitude.setText(sunInfo.get(0));
         this.latitude.setText(sunInfo.get(1));
@@ -114,7 +111,7 @@ public class SunFragment extends Fragment {
         handler.removeCallbacks(updateSunDataTask);
     }
 
-    public void setCurrentTime() {
+    private void setCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         time.setText(sdf.format(new Date()));
     }
