@@ -2,7 +2,7 @@ package astroweather.com.astro;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
 public class AppPreferenceManager {
     private static final String PREF_LONGITUDE = "savedLongitude";

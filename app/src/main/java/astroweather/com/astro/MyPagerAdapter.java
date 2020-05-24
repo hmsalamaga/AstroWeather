@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
+    SunFragment sunFragment = new SunFragment();
+    MoonFragment moonFragment = new MoonFragment();
+
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
@@ -15,9 +18,9 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new SunFragment();
+                return sunFragment;
             case 1:
-                return new MoonFragment();
+                return moonFragment;
         }
 
         return null;
@@ -27,4 +30,5 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 2;
     }
+
 }

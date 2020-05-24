@@ -12,9 +12,12 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SunFragment extends Fragment {
 
@@ -30,11 +33,27 @@ public class SunFragment extends Fragment {
     final Handler handler = new Handler();
 
 
-    private AppPreferenceManager appPreferenceManager;
     int refreshFrequency;
     double savedLongitude;
     double savedLatitude;
     private Context mContext;
+
+    Runnable updateTimerTask = new Runnable() {
+        @Override
+        public void run() {
+            setCurrentTime();
+            handler.postDelayed(this, 1000);
+        }
+    };
+
+    Runnable updateSunDataTask = new Runnable() {
+        @Override
+        public void run() {
+            setSunData(savedLatitude, savedLongitude);
+            Toast.makeText(mContext, getResources().getString(R.string.refreshed), Toast.LENGTH_SHORT).show();
+            handler.postDelayed(this, refreshFrequency * 1000L);
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +67,7 @@ public class SunFragment extends Fragment {
         sunsetAzimuth = view.findViewById(R.id.SunsetAzimuth);
         twilightTime = view.findViewById(R.id.TwilightTime);
         dawnTime = view.findViewById(R.id.DawnTime);
+        setCurrentTime();
 
         return view;
     }
@@ -69,24 +89,33 @@ public class SunFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mContext = getActivity();
-        appPreferenceManager = new AppPreferenceManager(getActivity().getApplicationContext());
+        AppPreferenceManager appPreferenceManager = new AppPreferenceManager(getActivity().getApplicationContext());
         savedLongitude = appPreferenceManager.loadLongitude();
         savedLatitude = appPreferenceManager.loadLatitude();
         refreshFrequency = appPreferenceManager.loadRefreshFrequency();
 
         setSunData(savedLatitude, savedLongitude);
-        Runnable updateTask = new Runnable() {
-            @Override
-            public void run() {
-                setSunData(savedLatitude, savedLongitude);
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                time.setText(sdf.format(cal.getTime()));
-                handler.postDelayed(this, 1000);
-            }
-        };
 
-        handler.postDelayed(updateTask, 5000);
+        handler.postDelayed(updateTimerTask, 1000);
+        handler.postDelayed(updateSunDataTask, refreshFrequency * 1000L);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(updateTimerTask);
+        handler.removeCallbacks(updateSunDataTask);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(updateTimerTask);
+        handler.removeCallbacks(updateSunDataTask);
+    }
+
+    public void setCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        time.setText(sdf.format(new Date()));
+    }
 }

@@ -12,16 +12,14 @@ import java.util.TimeZone;
 
 public class Calculator {
     private AstroCalculator astroCalculator;
-    private AstroCalculator.Location location;
-    private AstroDateTime astroDateTime;
 
     public Calculator(Double latitude, Double longitude) {
         Calendar calendar = new GregorianCalendar();
         TimeZone timeZone = calendar.getTimeZone();
-        astroDateTime = new AstroDateTime(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
+        AstroDateTime astroDateTime = new AstroDateTime(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
                 calendar.get(Calendar.SECOND), getOffset(), timeZone.inDaylightTime(new Date()));
-        location = new AstroCalculator.Location(latitude, longitude);
+        AstroCalculator.Location location = new AstroCalculator.Location(latitude, longitude);
         astroCalculator = new AstroCalculator(astroDateTime, location);
     }
 
