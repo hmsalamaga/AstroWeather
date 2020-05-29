@@ -13,7 +13,6 @@ class AppPreferenceManager {
     private static final Double DEFAULT_LATITUDE = 51.75924850;
     private static final int DEFAULT_FREQUENCY = 1;
 
-
     private final SharedPreferences sharedPreferences;
 
     public AppPreferenceManager(Context context) {

@@ -98,15 +98,8 @@ public class SunFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        handler.removeCallbacks(updateTimerTask);
-        handler.removeCallbacks(updateSunDataTask);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         handler.removeCallbacks(updateTimerTask);
         handler.removeCallbacks(updateSunDataTask);
     }

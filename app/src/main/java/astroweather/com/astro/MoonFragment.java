@@ -100,15 +100,8 @@ public class MoonFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        handler.removeCallbacks(updateTimerTask);
-        handler.removeCallbacks(updateMoonDataTask);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         handler.removeCallbacks(updateTimerTask);
         handler.removeCallbacks(updateMoonDataTask);
     }
