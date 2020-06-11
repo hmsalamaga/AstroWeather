@@ -1,4 +1,4 @@
-package astroweather.com.astro;
+package astroweather.com.astro.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,13 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.TextClock;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
+import astroweather.com.astro.utils.AppPreferenceManager;
+import astroweather.com.astro.utils.Calculator;
+import astroweather.com.astro.R;
 
 
 public class MoonFragment extends Fragment {
@@ -28,7 +28,6 @@ public class MoonFragment extends Fragment {
     private TextView fullMoon;
     private TextView faze;
     private TextView lunarDayData;
-    private TextClock time;
     private Context mContext = getActivity();
 
     private final Handler handler = new Handler();
@@ -36,14 +35,6 @@ public class MoonFragment extends Fragment {
     private int refreshFrequency;
     private double savedLongitude;
     private double savedLatitude;
-
-    private final Runnable updateTimerTask = new Runnable() {
-        @Override
-        public void run() {
-            setCurrentTime();
-            handler.postDelayed(this, 1000);
-        }
-    };
 
     private final Runnable updateMoonDataTask = new Runnable() {
         @Override
@@ -58,7 +49,6 @@ public class MoonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.moon_fragment, container, false);
 
-        time = view.findViewById(R.id.time);
         longitude = view.findViewById(R.id.longitude);
         latitude = view.findViewById(R.id.latitude);
         moonrise = view.findViewById(R.id.Moonrise);
@@ -67,7 +57,6 @@ public class MoonFragment extends Fragment {
         fullMoon = view.findViewById(R.id.FullMoon);
         faze = view.findViewById(R.id.Faze);
         lunarDayData = view.findViewById(R.id.LunarDayData);
-        setCurrentTime();
 
         return view;
     }
@@ -95,19 +84,12 @@ public class MoonFragment extends Fragment {
 
         setMoonData(savedLatitude, savedLongitude);
 
-        handler.postDelayed(updateTimerTask, 1000);
         handler.postDelayed(updateMoonDataTask, refreshFrequency * 1000L);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        handler.removeCallbacks(updateTimerTask);
         handler.removeCallbacks(updateMoonDataTask);
-    }
-
-    private void setCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        time.setText(sdf.format(new Date()));
     }
 }

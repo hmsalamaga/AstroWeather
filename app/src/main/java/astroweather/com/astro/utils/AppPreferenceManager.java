@@ -1,10 +1,10 @@
-package astroweather.com.astro;
+package astroweather.com.astro.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
-class AppPreferenceManager {
+public class AppPreferenceManager {
     private static final String PREF_LONGITUDE = "savedLongitude";
     private static final String PREF_LATITUDE = "savedLatitude";
     private static final String PREF_FREQUENCY = "refresh";

@@ -1,4 +1,4 @@
-package astroweather.com.astro;
+package astroweather.com.astro.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+
+import astroweather.com.astro.R;
 
 public class MainActivity extends AppCompatActivity {
 

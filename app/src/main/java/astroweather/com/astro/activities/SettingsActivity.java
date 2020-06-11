@@ -1,4 +1,4 @@
-package astroweather.com.astro;
+package astroweather.com.astro.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import astroweather.com.astro.utils.AppPreferenceManager;
+import astroweather.com.astro.R;
 
 
 public class SettingsActivity extends Activity {

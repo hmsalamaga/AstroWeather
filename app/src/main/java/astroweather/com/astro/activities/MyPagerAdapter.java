@@ -1,8 +1,11 @@
-package astroweather.com.astro;
+package astroweather.com.astro.activities;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import astroweather.com.astro.fragments.MoonFragment;
+import astroweather.com.astro.fragments.SunFragment;
 
 
 class MyPagerAdapter extends FragmentStatePagerAdapter {

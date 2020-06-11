@@ -1,4 +1,4 @@
-package astroweather.com.astro;
+package astroweather.com.astro.fragments;
 
 import android.content.Context;
 import android.os.Handler;
@@ -7,14 +7,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
+import astroweather.com.astro.utils.AppPreferenceManager;
+import astroweather.com.astro.utils.Calculator;
+import astroweather.com.astro.R;
 
 public class SunFragment extends Fragment {
 
@@ -26,7 +26,6 @@ public class SunFragment extends Fragment {
     private TextView sunsetAzimuth;
     private TextView twilightTime;
     private TextView dawnTime;
-    private TextClock time;
     private final Handler handler = new Handler();
 
 
@@ -34,14 +33,6 @@ public class SunFragment extends Fragment {
     private double savedLongitude;
     private double savedLatitude;
     private Context mContext;
-
-    private final Runnable updateTimerTask = new Runnable() {
-        @Override
-        public void run() {
-            setCurrentTime();
-            handler.postDelayed(this, 1000);
-        }
-    };
 
     private final Runnable updateSunDataTask = new Runnable() {
         @Override
@@ -55,7 +46,6 @@ public class SunFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sun_fragment, container, false);
-        time = view.findViewById(R.id.time);
         longitude = view.findViewById(R.id.longitude);
         latitude = view.findViewById(R.id.latitude);
         sunriseTime = view.findViewById(R.id.SunriseTime);
@@ -64,7 +54,6 @@ public class SunFragment extends Fragment {
         sunsetAzimuth = view.findViewById(R.id.SunsetAzimuth);
         twilightTime = view.findViewById(R.id.TwilightTime);
         dawnTime = view.findViewById(R.id.DawnTime);
-        setCurrentTime();
 
         return view;
     }
@@ -93,19 +82,12 @@ public class SunFragment extends Fragment {
 
         setSunData(savedLatitude, savedLongitude);
 
-        handler.postDelayed(updateTimerTask, 1000);
         handler.postDelayed(updateSunDataTask, refreshFrequency * 1000L);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        handler.removeCallbacks(updateTimerTask);
         handler.removeCallbacks(updateSunDataTask);
-    }
-
-    private void setCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        time.setText(sdf.format(new Date()));
     }
 }

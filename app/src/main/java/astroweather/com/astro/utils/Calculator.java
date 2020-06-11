@@ -1,4 +1,4 @@
-package astroweather.com.astro;
+package astroweather.com.astro.utils;
 
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 
-class Calculator {
+public class Calculator {
     private final AstroCalculator astroCalculator;
 
     public Calculator(Double latitude, Double longitude) {
