@@ -27,10 +27,9 @@
 
                 <ImageView
                     android:id="@+id/dayDescriptionImage"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/moon"/>
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:id="@+id/dayInfo"
@@ -38,12 +37,12 @@
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
-                    android:textColor="#fff"
-                    android:text="TEXT1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:shadowColor="#000"
-                    android:shadowRadius="5"/>
+                    android:shadowRadius="5"
+                    android:text="TEXT1"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </FrameLayout>
 
 
@@ -52,26 +51,49 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="8">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_arrow_downward_24" />
 
                 <TextView
                     android:id="@+id/dayLowInfo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="sans-serif"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="TEXT2"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_arrow_upward_24" />
 
                 <TextView
                     android:id="@+id/dayHighInfo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="sans-serif"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="TEXT3"
                     android:textSize="18sp"
                     android:textStyle="bold" />
