@@ -151,7 +151,6 @@ public class SpecificForecastActivity extends AppCompatActivity {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onRestoreInstanceState(savedInstanceState);
         dataFormat = savedInstanceState.getString("data");
         refreshData(false);

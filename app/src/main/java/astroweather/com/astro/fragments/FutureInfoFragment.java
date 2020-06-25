@@ -77,14 +77,12 @@ public class FutureInfoFragment extends Fragment {
 
     public FutureInfoFragment(SpecificForecastActivity activity) {
         this.activity = activity;
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_future_info, container, false);
 
         update();
@@ -99,7 +97,7 @@ public class FutureInfoFragment extends Fragment {
             recyclerView = view.findViewById(R.id.futureInfoCards);
             recyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getActivity());
-            adapter = new CardAdapter(forecasts, this);
+            adapter = new CardAdapter(forecasts, this, activity.dataFormat);
 
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());

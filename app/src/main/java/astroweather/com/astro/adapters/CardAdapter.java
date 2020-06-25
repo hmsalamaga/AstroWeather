@@ -21,6 +21,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     private ArrayList<ForecastDayModel> dataSet;
     private FutureInfoFragment futureInfoFragment;
+    private String dataFormat;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -38,8 +39,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         }
     }
 
-    public CardAdapter(ArrayList<ForecastDayModel> data, FutureInfoFragment fragment) {
+    public CardAdapter(ArrayList<ForecastDayModel> data, FutureInfoFragment fragment, String dataFormat) {
         this.dataSet = data;
+        this.dataFormat = dataFormat;
         futureInfoFragment = fragment;
     }
 
@@ -61,8 +63,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM", Locale.UK);
 
         dayInfo.setText(dateFormat.format(dataSet.get(listPosition).date * 1000L));
-        dayLowInfo.setText(dataSet.get(listPosition).low);
-        dayHighInfo.setText(dataSet.get(listPosition).high);
+        dayLowInfo.setText(dataSet.get(listPosition).low + properTemperatureUnit());
+        dayHighInfo.setText(dataSet.get(listPosition).high + properTemperatureUnit());
         dayDescriptionImage.setImageResource(prepareImageResource(dataSet.get(listPosition).code));
     }
 
@@ -81,6 +83,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         }
 
         return imageResource;
+    }
+
+    private String properTemperatureUnit() {
+        return dataFormat.equals("") ? "°F" : "°C";
     }
 }
 
