@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(getResources().getString(R.string.settings)).setIntent(new Intent(this, SettingsActivity.class));
+        menu.add("Prognoza").setIntent(new Intent(this, LocalizationListActivity.class));
         return true;
     }
 

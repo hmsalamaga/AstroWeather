@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="astroweather.com.astro">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -19,6 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.SpecificForecastActivity"></activity>
+        <activity
+            android:name=".activities.LocalizationListActivity"
+            android:label="ForecastActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>
