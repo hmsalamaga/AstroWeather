@@ -46,8 +46,6 @@ public class LocalizationListActivity extends Activity {
         addLocalization = findViewById(R.id.addLocalization);
         editLocalization = findViewById(R.id.editLocalization);
 
-        editLocalization.setHint("Nowa lokalizacja...");
-
         addLocalization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

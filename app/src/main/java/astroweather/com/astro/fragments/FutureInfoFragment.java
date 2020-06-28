@@ -30,10 +30,8 @@ public class FutureInfoFragment extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private final SpecificForecastActivity activity;
 
-    public FutureInfoFragment(SpecificForecastActivity activity) {
-        this.activity = activity;
+    public FutureInfoFragment() {
     }
 
 
@@ -48,13 +46,14 @@ public class FutureInfoFragment extends Fragment {
 
     public void update() {
         try {
-            forecastDataModel = activity.forecastDataModel;
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
+            forecastDataModel = specificForecastActivity.forecastDataModel;
             forecasts = new ArrayList<>(Arrays.asList(forecastDataModel.forecasts));
 
             recyclerView = view.findViewById(R.id.futureInfoCards);
             recyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(getActivity());
-            adapter = new CardAdapter(forecasts, this, activity.dataFormat);
+            adapter = new CardAdapter(forecasts, this, specificForecastActivity.dataFormat);
 
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());

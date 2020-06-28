@@ -77,7 +77,7 @@ public class SunFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mContext = getActivity();
-        AppPreferenceManager appPreferenceManager = new AppPreferenceManager(getActivity().getApplicationContext());
+        AppPreferenceManager appPreferenceManager = new AppPreferenceManager(requireActivity().getApplicationContext());
         savedLongitude = appPreferenceManager.loadLongitude();
         savedLatitude = appPreferenceManager.loadLatitude();
         refreshFrequency = appPreferenceManager.loadRefreshFrequency();

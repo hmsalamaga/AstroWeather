@@ -22,7 +22,6 @@ public class AdvancedInfoFragment extends Fragment {
     TextView visibilityInfo;
 
     public AdvancedInfoFragment() {
-        // Required empty public constructor
     }
 
 
@@ -42,8 +41,9 @@ public class AdvancedInfoFragment extends Fragment {
 
     public void update() {
         try {
-            ForecastDataModel forecastDataModel = ((SpecificForecastActivity) getActivity()).forecastDataModel;
-            String dataFormat = ((SpecificForecastActivity) getActivity()).dataFormat;
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
+            ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
+            String dataFormat = specificForecastActivity.dataFormat;
             windStrengthInfo.setText(forecastDataModel.currentObservation.wind.speed + (dataFormat.isEmpty() ? " m/h" : " km/h"));
             windDirectionInfo.setText(forecastDataModel.currentObservation.wind.direction + "°");
             humidityInfo.setText(forecastDataModel.currentObservation.atmosphere.humidity + "%");

@@ -28,7 +28,7 @@ class MyPagerAdapter extends FragmentStatePagerAdapter {
                 return moonFragment;
         }
 
-        return null;
+        return sunFragment;
     }
 
     @Override

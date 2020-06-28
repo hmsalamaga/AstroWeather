@@ -29,6 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Objects;
+
 import astroweather.com.astro.fragments.AdvancedInfoFragment;
 import astroweather.com.astro.fragments.BasicInfoFragment;
 import astroweather.com.astro.fragments.FutureInfoFragment;
@@ -41,22 +43,18 @@ import astroweather.com.astro.utils.AppPreferenceManager;
 public class SpecificForecastActivity extends AppCompatActivity {
 
 
-    boolean tabletSize;
     String localizationData;
     public ForecastDataModel forecastDataModel;
     ViewPager pager;
     PagerAdapter pagerAdapter;
-    Button refresh;
     public String dataFormat = "";
     Button imperialSystem;
     Button metricSystem;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
     boolean showErrorToast = true;
 
     BasicInfoFragment basicInfoFragment = new BasicInfoFragment();
     AdvancedInfoFragment advancedInfoFragment = new AdvancedInfoFragment();
-    FutureInfoFragment futureInfoFragment = new FutureInfoFragment(this);
+    FutureInfoFragment futureInfoFragment = new FutureInfoFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +77,7 @@ public class SpecificForecastActivity extends AppCompatActivity {
         setUpMetricSystemOnClickEvent();
 
         pager = findViewById(R.id.forecastContainer);
-        pagerAdapter = new ListPagerAdapter(getSupportFragmentManager(), this);
+        pagerAdapter = new ListPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
 
         refreshData(true);
@@ -111,7 +109,7 @@ public class SpecificForecastActivity extends AppCompatActivity {
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo = Objects.requireNonNull(connectivityManager).getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
@@ -201,12 +199,10 @@ public class SpecificForecastActivity extends AppCompatActivity {
 
         final FragmentManager fragmentManager;
         final Fragment[] fragments;
-        final SpecificForecastActivity activity;
 
-        ListPagerAdapter(FragmentManager fm, SpecificForecastActivity activity) {
+        ListPagerAdapter(FragmentManager fm) {
             fragmentManager = fm;
             fragments = new Fragment[3];
-            this.activity = activity;
         }
 
         @Override
@@ -246,7 +242,7 @@ public class SpecificForecastActivity extends AppCompatActivity {
                 else if (position == 1)
                     fragments[position] = (advancedInfoFragment = new AdvancedInfoFragment());
                 else if (position == 2) {
-                    fragments[position] = (futureInfoFragment = new FutureInfoFragment(activity));
+                    fragments[position] = (futureInfoFragment = new FutureInfoFragment());
                 }
             }
             return fragments[position];

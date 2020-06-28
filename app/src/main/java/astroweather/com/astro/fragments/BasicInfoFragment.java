@@ -23,10 +23,7 @@ public class BasicInfoFragment extends Fragment {
     TextView pressureInfo;
     TextView descriptionInfo;
 
-    ForecastDataModel forecastDataModel;
-
     public BasicInfoFragment() {
-        // Required empty public constructor
     }
 
 
@@ -48,9 +45,9 @@ public class BasicInfoFragment extends Fragment {
     public void update() {
 
         try {
-//            boolean isTablet =  ((SpecificForecastActivity) getActivity()).tabletSize;
-            ForecastDataModel forecastDataModel = ((SpecificForecastActivity) getActivity()).forecastDataModel;
-            String dataFormat = ((SpecificForecastActivity) getActivity()).dataFormat;
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
+            ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
+            String dataFormat = specificForecastActivity.dataFormat;
             cityInfo.setText(forecastDataModel.location.city + ", " + forecastDataModel.location.region + ", " + forecastDataModel.location.country);
             latInfo.setText(forecastDataModel.location.latitude + "°");
             longInfo.setText(forecastDataModel.location.longitude + "°");

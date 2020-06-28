@@ -79,9 +79,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         String uri = "weather" + code;
         String defaultUri = "undefined";
 
-        int imageResource = futureInfoFragment.getResources().getIdentifier(uri, "drawable", futureInfoFragment.getActivity().getPackageName());
+        int imageResource = futureInfoFragment.getResources().getIdentifier(uri, "drawable", futureInfoFragment.requireActivity().getPackageName());
         if (imageResource == 0) {
-            return futureInfoFragment.getResources().getIdentifier(defaultUri, "drawable", futureInfoFragment.getActivity().getPackageName());
+            return futureInfoFragment.getResources().getIdentifier(defaultUri, "drawable", futureInfoFragment.requireActivity().getPackageName());
         }
 
         return imageResource;
