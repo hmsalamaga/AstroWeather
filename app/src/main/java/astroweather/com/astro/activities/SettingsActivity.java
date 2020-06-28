@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import astroweather.com.astro.utils.AppPreferenceManager;
 import astroweather.com.astro.R;
 
@@ -85,7 +87,7 @@ public class SettingsActivity extends Activity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         longitude.setText(savedInstanceState.getString("savedLongitude"));
         latitude.setText(savedInstanceState.getString("savedLatitude"));

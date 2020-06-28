@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/sunFragment"
-        android:name="astroweather.com.astro.SunFragment"
+        android:name="astroweather.com.astro.fragments.SunFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -16,7 +16,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/moonFragment"
-        android:name="astroweather.com.astro.MoonFragment"
+        android:name="astroweather.com.astro.fragments.MoonFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

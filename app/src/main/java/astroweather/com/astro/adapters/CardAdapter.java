@@ -1,5 +1,6 @@
 package astroweather.com.astro.adapters;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -19,16 +20,16 @@ import astroweather.com.astro.models.ForecastDayModel;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private ArrayList<ForecastDayModel> dataSet;
-    private FutureInfoFragment futureInfoFragment;
-    private String dataFormat;
+    private final ArrayList<ForecastDayModel> dataSet;
+    private final FutureInfoFragment futureInfoFragment;
+    private final String dataFormat;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dayInfo;
-        TextView dayLowInfo;
-        TextView dayHighInfo;
-        ImageView dayDescriptionImage;
+        final TextView dayInfo;
+        final TextView dayLowInfo;
+        final TextView dayHighInfo;
+        final ImageView dayDescriptionImage;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -45,6 +46,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         futureInfoFragment = fragment;
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {

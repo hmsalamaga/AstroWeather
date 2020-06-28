@@ -19,9 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
+        android:inputType="numberDecimal"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:inputType="numberDecimal" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
@@ -37,9 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
+        android:inputType="numberDecimal"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:inputType="numberDecimal" />
+        android:textStyle="bold" />
 
 
     <TextView
@@ -56,9 +56,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
+        android:inputType="number"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:inputType="number" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/ok"
@@ -67,6 +67,8 @@
         android:gravity="center"
         android:text="@string/ok"
         android:textSize="20sp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 </LinearLayout>

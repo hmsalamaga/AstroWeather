@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="5"
     tools:context=".activities.LocalizationListActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="0dp"
+        android:layout_weight="4">
 
         <LinearLayout
             android:id="@+id/buttonList"
@@ -22,14 +24,19 @@
         android:id="@+id/editLocalization"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Podaj lokalizacje"
+        android:autofillHints="@string/type_localization"
         android:ems="10"
+        android:textStyle="bold"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/addLocalization"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
         android:layout_gravity="center"
-        android:text="Dodaj lokalizację" />
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:text="@string/add_localization"
+        android:textStyle="bold"/>
 </LinearLayout>

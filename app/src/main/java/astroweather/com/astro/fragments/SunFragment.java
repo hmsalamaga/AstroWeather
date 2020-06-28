@@ -2,7 +2,9 @@ package astroweather.com.astro.fragments;
 
 import android.content.Context;
 import android.os.Handler;
+
 import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

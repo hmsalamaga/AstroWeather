@@ -1,7 +1,9 @@
 package astroweather.com.astro.fragments;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,16 +40,15 @@ public class AdvancedInfoFragment extends Fragment {
         return view;
     }
 
-    public void update()
-    {
+    public void update() {
         try {
             ForecastDataModel forecastDataModel = ((SpecificForecastActivity) getActivity()).forecastDataModel;
-            String dataFormat =  ((SpecificForecastActivity) getActivity()).dataFormat;
-            windStrengthInfo.setText(forecastDataModel.currentObservation.wind.speed+(dataFormat.isEmpty()?" m/h":" km/h"));
-            windDirectionInfo.setText(forecastDataModel.currentObservation.wind.direction+"°");
-            humidityInfo.setText(forecastDataModel.currentObservation.atmosphere.humidity+"%");
-            visibilityInfo.setText(forecastDataModel.currentObservation.atmosphere.visibility+(dataFormat.isEmpty()?" m":" km"));
-        }catch (Exception e){
+            String dataFormat = ((SpecificForecastActivity) getActivity()).dataFormat;
+            windStrengthInfo.setText(forecastDataModel.currentObservation.wind.speed + (dataFormat.isEmpty() ? " m/h" : " km/h"));
+            windDirectionInfo.setText(forecastDataModel.currentObservation.wind.direction + "°");
+            humidityInfo.setText(forecastDataModel.currentObservation.atmosphere.humidity + "%");
+            visibilityInfo.setText(forecastDataModel.currentObservation.atmosphere.visibility + (dataFormat.isEmpty() ? " m" : " km"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

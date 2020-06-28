@@ -1,22 +1,22 @@
 package astroweather.com.astro.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,20 +25,18 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
-
-import astroweather.com.astro.adapters.CardAdapter;
 import astroweather.com.astro.fragments.AdvancedInfoFragment;
 import astroweather.com.astro.fragments.BasicInfoFragment;
 import astroweather.com.astro.fragments.FutureInfoFragment;
 import astroweather.com.astro.R;
 import astroweather.com.astro.models.ForecastDataModel;
-import astroweather.com.astro.models.ForecastDayModel;
-import astroweather.com.astro.requests.ExampleRequest;
-import astroweather.com.astro.requests.ExampleRequestManager;
+import astroweather.com.astro.requests.GetForecastsRequest;
+import astroweather.com.astro.requests.RequestManager;
+import astroweather.com.astro.utils.AppPreferenceManager;
 
 public class SpecificForecastActivity extends AppCompatActivity {
 
@@ -60,6 +58,56 @@ public class SpecificForecastActivity extends AppCompatActivity {
     AdvancedInfoFragment advancedInfoFragment = new AdvancedInfoFragment();
     FutureInfoFragment futureInfoFragment = new FutureInfoFragment(this);
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_specific_forecast);
+
+        FloatingActionButton fab = findViewById(R.id.refresh_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshData(true);
+            }
+        });
+        localizationData = getIntent().getStringExtra("localizationInfo");
+        showErrorToast = getIntent().getBooleanExtra("fromButton", false);
+        SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
+        dataFormat = sharedPreferences.getString("dataFormat", "");
+
+        setUpImperialSystemOnClickEvent();
+        setUpMetricSystemOnClickEvent();
+
+        pager = findViewById(R.id.forecastContainer);
+        pagerAdapter = new ListPagerAdapter(getSupportFragmentManager(), this);
+        pager.setAdapter(pagerAdapter);
+
+        refreshData(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(getResources().getString(R.string.settings)).setIntent(new Intent(this, LocalizationListActivity.class));
+        menu.add("Astro").setIntent(new Intent(this, MainActivity.class));
+        return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("data", dataFormat);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        dataFormat = savedInstanceState.getString("data");
+        refreshData(false);
+        showErrorToast = false;
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -67,109 +115,15 @@ public class SpecificForecastActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_specific_forecast);
-        getSupportActionBar().hide();
-        localizationData = getIntent().getStringExtra("localizationInfo");
-        showErrorToast = getIntent().getBooleanExtra("fromButton", false);
-        refresh = findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                refreshData(true);
-            }
-        });
-        SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
-        dataFormat = sharedPreferences.getString("dataFormat", "");
-
-        imperialSystem = findViewById(R.id.imperialSystem);
-        imperialSystem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkAvailable()) {
-                    dataFormat = "";
-                    refreshData(false);
-                } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
-                    dataFormat = sharedPreferences.getString("dataFormat", "");
-                }
-            }
-        });
-
-        metricSystem = findViewById(R.id.metricSystem);
-        metricSystem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkAvailable()) {
-                    dataFormat = "&u=c";
-                    refreshData(false);
-                } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
-                    dataFormat = sharedPreferences.getString("dataFormat", "");
-
-                }
-            }
-        });
-
-//        tabletSize = getResources().getBoolean(R.bool.isTablet);
-//
-//        if (tabletSize && savedInstanceState==null) {
-//            fragmentManager = getSupportFragmentManager();
-//            fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(R.id.basicContent, basicInfoFragment,"fragmentBasicInfo");
-//            fragmentTransaction.add(R.id.advancedContent, advancedInfoFragment,"fragmentAdvancedInfo");
-//            fragmentTransaction.add(R.id.futureContent, futureInfoFragment,"fragmentFutureInfo");
-//            fragmentTransaction.commit();
-//
-//        }
-//        else if (tabletSize && savedInstanceState!=null)
-//        {
-//            fragmentManager = getSupportFragmentManager();
-//            fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.basicContent, basicInfoFragment,"fragmentBasicInfo");
-//            fragmentTransaction.replace(R.id.advancedContent, advancedInfoFragment,"fragmentAdvancedInfo");
-//            fragmentTransaction.replace(R.id.futureContent, futureInfoFragment,"fragmentFutureInfo");
-//            fragmentTransaction.commit();
-//        }
-//        else {
-        pager = findViewById(R.id.forecastContainer);
-        pagerAdapter = new ListPagerAdapter(getSupportFragmentManager(), this);
-        pager.setAdapter(pagerAdapter);
-//        }
-
-        refreshData(true);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("data", dataFormat);
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        dataFormat = savedInstanceState.getString("data");
-        refreshData(false);
-        showErrorToast = false;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     public void updateFragments() {
         basicInfoFragment.update();
         advancedInfoFragment.update();
         futureInfoFragment.update();
+        Toast.makeText(getApplicationContext(), getResources().getString(R.string.refreshed), Toast.LENGTH_LONG).show();
     }
 
     public void refreshData(final boolean fromButton) {
-        ExampleRequest request = new ExampleRequest(Request.Method.GET, null, null, new Response.Listener() {
+        GetForecastsRequest request = new GetForecastsRequest(Request.Method.GET, null, null, new Response.Listener() {
             @Override
             public void onResponse(Object response) {
                 SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
@@ -180,8 +134,11 @@ public class SpecificForecastActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(localizationData, jsonString);
                 editor.putString("dataFormat", dataFormat);
-                editor.commit();
+                editor.apply();
                 forecastDataModel = gson.fromJson(jsonString, ForecastDataModel.class);
+                AppPreferenceManager appPreferenceManager = new AppPreferenceManager(getApplicationContext());
+                appPreferenceManager.saveLongitude(Double.parseDouble(forecastDataModel.location.longitude));
+                appPreferenceManager.saveLatitude(Double.parseDouble(forecastDataModel.location.latitude));
                 updateFragments();
             }
         }, new Response.ErrorListener() {
@@ -200,18 +157,51 @@ public class SpecificForecastActivity extends AppCompatActivity {
                 updateFragments();
             }
         });
-        ExampleRequestManager requestManager = ExampleRequestManager.getInstance(this);
+        RequestManager requestManager = RequestManager.getInstance(this);
         request.setCity(localizationData);
         request.setDataFormat(dataFormat);
         requestManager.addToRequestQueue(request);
     }
 
+    public void setUpImperialSystemOnClickEvent() {
+        imperialSystem = findViewById(R.id.imperialSystem);
+        imperialSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isNetworkAvailable()) {
+                    dataFormat = "";
+                    refreshData(false);
+                } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
+                    dataFormat = sharedPreferences.getString("dataFormat", "");
+                }
+            }
+        });
+    }
+
+    public void setUpMetricSystemOnClickEvent() {
+        metricSystem = findViewById(R.id.metricSystem);
+        metricSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isNetworkAvailable()) {
+                    dataFormat = "&u=c";
+                    refreshData(false);
+                } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences(localizationData, MODE_PRIVATE);
+                    dataFormat = sharedPreferences.getString("dataFormat", "");
+
+                }
+            }
+        });
+    }
+
 
     class ListPagerAdapter extends PagerAdapter {
 
-        FragmentManager fragmentManager;
-        Fragment[] fragments;
-        SpecificForecastActivity activity;
+        final FragmentManager fragmentManager;
+        final Fragment[] fragments;
+        final SpecificForecastActivity activity;
 
         ListPagerAdapter(FragmentManager fm, SpecificForecastActivity activity) {
             fragmentManager = fm;
@@ -220,14 +210,15 @@ public class SpecificForecastActivity extends AppCompatActivity {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            assert (0 <= position && position < fragments.length);
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            if (0 > position || position >= fragments.length) throw new IndexOutOfBoundsException();
             FragmentTransaction trans = fragmentManager.beginTransaction();
             trans.remove(fragments[position]);
             trans.commit();
             fragments[position] = null;
         }
 
+        @NonNull
         @Override
         public Fragment instantiateItem(ViewGroup container, int position) {
             Fragment fragment = getItem(position);
@@ -243,12 +234,12 @@ public class SpecificForecastActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object fragment) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object fragment) {
             return ((Fragment) fragment).getView() == view;
         }
 
         public Fragment getItem(int position) {
-            assert (0 <= position && position < fragments.length);
+            if (0 > position || position >= fragments.length) throw new IndexOutOfBoundsException();
             if (fragments[position] == null) {
                 if (position == 0)
                     fragments[position] = (basicInfoFragment = new BasicInfoFragment());

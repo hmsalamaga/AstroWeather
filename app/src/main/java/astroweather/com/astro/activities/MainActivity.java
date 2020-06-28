@@ -2,8 +2,10 @@ package astroweather.com.astro.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.Menu;
 

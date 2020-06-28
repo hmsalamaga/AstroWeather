@@ -20,11 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.SpecificForecastActivity"></activity>
-        <activity
-            android:name=".activities.LocalizationListActivity"
-            android:label="ForecastActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".activities.SpecificForecastActivity" />
+        <activity android:name=".activities.LocalizationListActivity" />
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@
     <string name="latitude">Szerokość: </string>
     <string name="refresh">Częstotliwość odświeżania: </string>
     <string name="settings">Ustawienia</string>
+    <string name="astro">Astro</string>
     <string name="refreshed">Odświeżone</string>
     <string name="ok">OK</string>
 
@@ -23,4 +24,24 @@
     <string name="full_moon">Pełnia: </string>
     <string name="faze">Faza: </string>
     <string name="lunar_day">Dzień miesiąca synodycznego: </string>
+
+    <string name="basic_information">PODSTAWOWE INFORMACJE</string>
+    <string name="location">Miejscowość:</string>
+    <string name="temperature">Temperatura:</string>
+    <string name="pressure">Ciśnienie:</string>
+    <string name="description">Opis:</string>
+
+    <string name="additional_information">DODATKOWE INFORMACJE</string>
+    <string name="wind_speed">Siła wiatru:</string>
+    <string name="wind_direction">Kierunek wiatru:</string>
+    <string name="humidity">Wilgotność:</string>
+    <string name="visibility">Widoczność:</string>
+
+    <string name="type_localization">Podaj lokalizacje</string>
+    <string name="add_localization">Dodaj lokalizacje</string>
+
+    <string name="imperial_system">System imperialny</string>
+    <string name="metric_system">System metryczny</string>
+
+    <string name="localization_not_found">Nie znaleziono lokalizacji.</string>
 </resources>

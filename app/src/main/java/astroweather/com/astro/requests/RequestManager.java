@@ -6,19 +6,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class ExampleRequestManager {
-    private static ExampleRequestManager sInstance;
-    Context mContext;
-    RequestQueue mRequestQueue;
+public class RequestManager {
+    private static RequestManager sInstance;
+    final Context mContext;
+    final RequestQueue mRequestQueue;
 
-    public static synchronized ExampleRequestManager getInstance(Context context) {
+    public static synchronized RequestManager getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new ExampleRequestManager(context);
+            sInstance = new RequestManager(context);
         }
         return sInstance;
     }
 
-    private ExampleRequestManager(Context context) {
+    private RequestManager(Context context) {
         mContext = context;
         mRequestQueue = Volley.newRequestQueue(mContext);
     }
