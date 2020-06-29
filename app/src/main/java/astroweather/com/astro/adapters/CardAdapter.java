@@ -63,11 +63,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         TextView dayHighInfo = holder.dayHighInfo;
         ImageView dayDescriptionImage = holder.dayDescriptionImage;
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM", Locale.getDefault());
+        ForecastDayModel forecastDayModel = dataSet.get(listPosition);
 
-        dayInfo.setText(dateFormat.format(dataSet.get(listPosition).date * 1000L));
-        dayLowInfo.setText(dataSet.get(listPosition).low + properTemperatureUnit());
-        dayHighInfo.setText(dataSet.get(listPosition).high + properTemperatureUnit());
-        dayDescriptionImage.setImageResource(prepareImageResource(dataSet.get(listPosition).code));
+        dayInfo.setText(dateFormat.format(forecastDayModel.date * 1000L) + "\n" + forecastDayModel.text);
+        dayLowInfo.setText(forecastDayModel.low + properTemperatureUnit());
+        dayHighInfo.setText(forecastDayModel.high + properTemperatureUnit());
+        dayDescriptionImage.setImageResource(prepareImageResource(forecastDayModel.code));
     }
 
     @Override

@@ -46,18 +46,22 @@ public class FutureInfoFragment extends Fragment {
 
     public void update() {
         try {
-            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
-            forecastDataModel = specificForecastActivity.forecastDataModel;
-            forecasts = new ArrayList<>(Arrays.asList(forecastDataModel.forecasts));
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) getActivity();
+            if (specificForecastActivity != null) {
+                forecastDataModel = specificForecastActivity.forecastDataModel;
+                if (forecastDataModel != null) {
+                    forecasts = new ArrayList<>(Arrays.asList(forecastDataModel.forecasts));
 
-            recyclerView = view.findViewById(R.id.futureInfoCards);
-            recyclerView.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(getActivity());
-            adapter = new CardAdapter(forecasts, this, specificForecastActivity.dataFormat);
+                    recyclerView = view.findViewById(R.id.futureInfoCards);
+                    recyclerView.setHasFixedSize(true);
+                    layoutManager = new LinearLayoutManager(getActivity());
+                    adapter = new CardAdapter(forecasts, this, specificForecastActivity.dataFormat);
 
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

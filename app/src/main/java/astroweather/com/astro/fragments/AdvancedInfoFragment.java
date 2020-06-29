@@ -41,13 +41,17 @@ public class AdvancedInfoFragment extends Fragment {
 
     public void update() {
         try {
-            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
-            ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
-            String dataFormat = specificForecastActivity.dataFormat;
-            windStrengthInfo.setText(forecastDataModel.currentObservation.wind.speed + (dataFormat.isEmpty() ? " m/h" : " km/h"));
-            windDirectionInfo.setText(forecastDataModel.currentObservation.wind.direction + "°");
-            humidityInfo.setText(forecastDataModel.currentObservation.atmosphere.humidity + "%");
-            visibilityInfo.setText(forecastDataModel.currentObservation.atmosphere.visibility + (dataFormat.isEmpty() ? " m" : " km"));
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) getActivity();
+            if (specificForecastActivity != null) {
+                ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
+                if (forecastDataModel != null) {
+                    String dataFormat = specificForecastActivity.dataFormat;
+                    windStrengthInfo.setText(forecastDataModel.currentObservation.wind.speed + (dataFormat.isEmpty() ? " m/h" : " km/h"));
+                    windDirectionInfo.setText(forecastDataModel.currentObservation.wind.direction + "°");
+                    humidityInfo.setText(forecastDataModel.currentObservation.atmosphere.humidity + "%");
+                    visibilityInfo.setText(forecastDataModel.currentObservation.atmosphere.visibility + (dataFormat.isEmpty() ? " m" : " km"));
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

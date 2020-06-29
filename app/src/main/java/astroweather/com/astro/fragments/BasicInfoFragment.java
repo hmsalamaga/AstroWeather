@@ -46,14 +46,18 @@ public class BasicInfoFragment extends Fragment {
 
         try {
             SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) getActivity();
-            ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
-            String dataFormat = specificForecastActivity.dataFormat;
-            cityInfo.setText(forecastDataModel.location.city + ", " + forecastDataModel.location.region + ", " + forecastDataModel.location.country);
-            latInfo.setText(forecastDataModel.location.latitude + "°");
-            longInfo.setText(forecastDataModel.location.longitude + "°");
-            temperatureInfo.setText(forecastDataModel.currentObservation.condition.temperature + (dataFormat.isEmpty() ? " F" : " C"));
-            pressureInfo.setText(forecastDataModel.currentObservation.atmosphere.pressure + (dataFormat.isEmpty() ? " inchHg" : " mbar"));
-            descriptionInfo.setText(forecastDataModel.currentObservation.condition.text);
+            if (specificForecastActivity != null) {
+                ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
+                if (forecastDataModel != null) {
+                    String dataFormat = specificForecastActivity.dataFormat;
+                    cityInfo.setText(forecastDataModel.location.city + ", " + forecastDataModel.location.region + ", " + forecastDataModel.location.country);
+                    latInfo.setText(forecastDataModel.location.latitude + "°");
+                    longInfo.setText(forecastDataModel.location.longitude + "°");
+                    temperatureInfo.setText(forecastDataModel.currentObservation.condition.temperature + (dataFormat.isEmpty() ? " F" : " C"));
+                    pressureInfo.setText(forecastDataModel.currentObservation.atmosphere.pressure + (dataFormat.isEmpty() ? " inchHg" : " mbar"));
+                    descriptionInfo.setText(forecastDataModel.currentObservation.condition.text);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
