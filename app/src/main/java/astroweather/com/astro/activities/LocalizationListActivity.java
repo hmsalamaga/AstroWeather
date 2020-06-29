@@ -52,7 +52,8 @@ public class LocalizationListActivity extends Activity {
                 if (!validateName(editLocalization.getText().toString())) return;
                 final Button button = new Button(getApplicationContext());
                 button.setText(editLocalization.getText());
-                button.setBackgroundColor(Color.parseColor("#AAAAAA"));
+                button.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                button.setTextColor(getResources().getColor(R.color.white));
                 button.setPadding(0, 10, 0, 10);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override

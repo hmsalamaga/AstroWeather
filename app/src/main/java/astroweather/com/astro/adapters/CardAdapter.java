@@ -62,7 +62,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         TextView dayLowInfo = holder.dayLowInfo;
         TextView dayHighInfo = holder.dayHighInfo;
         ImageView dayDescriptionImage = holder.dayDescriptionImage;
-        DateFormat dateFormat = new SimpleDateFormat("dd MMMM", Locale.UK);
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM", Locale.getDefault());
 
         dayInfo.setText(dateFormat.format(dataSet.get(listPosition).date * 1000L));
         dayLowInfo.setText(dataSet.get(listPosition).low + properTemperatureUnit());

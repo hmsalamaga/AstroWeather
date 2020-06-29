@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class GetForecastsRequest<T> extends JsonRequest<T> {
@@ -61,7 +62,7 @@ public class GetForecastsRequest<T> extends JsonRequest<T> {
 
     @Override
     public String getUrl() {
-        return baseUrl + "?location=" + city + dataFormat + "&format=json";
+        return baseUrl + "?location=" + city + dataFormat + "&format=json&lang=" + Locale.getDefault().toLanguageTag();
     }
 
     @Override

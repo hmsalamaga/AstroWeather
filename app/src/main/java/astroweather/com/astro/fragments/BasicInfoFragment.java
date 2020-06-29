@@ -45,7 +45,7 @@ public class BasicInfoFragment extends Fragment {
     public void update() {
 
         try {
-            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) requireActivity();
+            SpecificForecastActivity specificForecastActivity = (SpecificForecastActivity) getActivity();
             ForecastDataModel forecastDataModel = specificForecastActivity.forecastDataModel;
             String dataFormat = specificForecastActivity.dataFormat;
             cityInfo.setText(forecastDataModel.location.city + ", " + forecastDataModel.location.region + ", " + forecastDataModel.location.country);
